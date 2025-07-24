@@ -37,7 +37,7 @@ app.get('/', async (req, res) => {
   const userAgent = req.headers['user-agent'];
   let geo;
   try {
-    geo = geoip.lookup(ip);
+    geo = geoip.lookup(ip.includes(',') ? ip.split(',')[0].trim() : ip);
     console.log(`Fetching geolocation for IP: ${geo}`);
   } catch (err) {
     console.warn('Failed to fetch IP geolocation');
