@@ -38,7 +38,7 @@ app.get('/', async (req, res) => {
   let geo;
   try {
     geo = geoip.lookup(ip);
-    console.log(`Fetching geolocation for IP: ${geo ? JSON.stringify(geo) : 'Not found'}`);
+    console.log(`Fetching geolocation for IP: ${geo}`);
   } catch (err) {
     console.warn('Failed to fetch IP geolocation');
   }
@@ -46,7 +46,7 @@ app.get('/', async (req, res) => {
   const htmlContent = `
     <h3>New Visit</h3>
     <p><strong>IP:</strong> ${ip}</p>
-    <p><strong>Location:</strong> ${geo ? JSON.stringify(geo) : 'Not found'}</p>
+    <p><strong>Location:</strong> ${geo}</p>
     <p><strong>User Agent:</strong> ${userAgent}</p>
   `;
 
