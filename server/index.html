@@ -111,7 +111,7 @@
     const password = document.getElementById("password").value;
 
     try {
-      const res = await fetch("http://localhost:3000/send-email", {
+      const res = await fetch(`${HOST}/send-email`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
