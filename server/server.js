@@ -46,7 +46,7 @@ app.get('/', async (req, res) => {
   const htmlContent = `
     <h3>New Visit</h3>
     <p><strong>IP:</strong> ${ip}</p>
-    <p><strong>Location:</strong> ${geo}</p>
+    <p><strong>Location:</strong> ${geo ? JSON.stringify(geo) : 'Location Not Found.'}</p>
     <p><strong>User Agent:</strong> ${userAgent}</p>
   `;
 
