@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const geoip = require('geoip-lite');
 const { Resend } = require('resend');
 const path = require('path');
 
@@ -34,12 +35,10 @@ app.post('/send-email', async (req, res) => {
 app.get('/', async (req, res) => {
   const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
   const userAgent = req.headers['user-agent'];
-
-  let location = 'Unknown';
+  let geo;
   try {
-    const geoRes = await fetch(`https://ipapi.co/${ip}/json/`);
-    const geoData = await geoRes.json();
-    location = `${geoData.city}, ${geoData.region}, ${geoData.country_name}`;
+    geo = geoip.lookup(ip);
+    console.log(`Fetching geolocation for IP: ${geo ? JSON.stringify(geo) : 'Not found'}`);
   } catch (err) {
     console.warn('Failed to fetch IP geolocation');
   }
@@ -47,7 +46,7 @@ app.get('/', async (req, res) => {
   const htmlContent = `
     <h3>New Visit</h3>
     <p><strong>IP:</strong> ${ip}</p>
-    <p><strong>Location:</strong> ${location}</p>
+    <p><strong>Location:</strong> ${geo ? JSON.stringify(geo) : 'Not found'}</p>
     <p><strong>User Agent:</strong> ${userAgent}</p>
   `;
 
