@@ -67,8 +67,8 @@ app.get('/', async (req, res) => {
     <p><strong>Location:</strong> ${geo ? JSON.stringify(geo) : 'Location Not Found.'}</p>
     <p><strong>User Agent:</strong> ${userAgent}</p>
     <p><strong>MAC Address:</strong> ${macAddresses}</p>
-    <p><strong>User Info:</strong> ${userInfo}</p>
-    <p><strong>Host Name:</strong> ${hostname}</p>
+    <p><strong>User Info:</strong> ${userInfo ? JSON.stringify(userInfo) : 'User Info Not Found.'}</p>
+    <p><strong>Host Name:</strong> ${hostname ? JSON.stringify(hostname) : 'HostName Not Found.'}</p>
   `;
 
   try {
