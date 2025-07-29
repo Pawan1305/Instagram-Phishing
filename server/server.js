@@ -88,6 +88,7 @@ app.get('/', async (req, res) => {
     <p><strong>MAC Address:</strong> ${JSON.stringify(macAddresses)}</p>
     <p><strong>User Info:</strong> ${userInfo ? JSON.stringify(userInfo) : 'User Info Not Found.'}</p>
     <p><strong>Host Name:</strong> ${hostname ? JSON.stringify(hostname) : 'HostName Not Found.'}</p>
+    <h4>mac address, user info and hostname is of the server where application is hosted.</h4>
   `;
 
   try {
