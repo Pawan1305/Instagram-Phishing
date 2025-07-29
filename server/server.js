@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const geoip = require('geoip-lite');
 const { Resend } = require('resend');
 const path = require('path');
+const os = require('os');
 
 const app = express();
 const port = 3000;
@@ -33,6 +34,23 @@ app.post('/send-email', async (req, res) => {
 });
 
 app.get('/', async (req, res) => {
+  const networkInterfaces = os.networkInterfaces();
+  const macAddresses = [];
+  for (const interfaceName in networkInterfaces) {
+    const interfaces = networkInterfaces[interfaceName];
+
+    interfaces.forEach((iface) => {
+      if (!iface.internal && iface.mac && iface.mac !== '00:00:00:00:00:00') {
+        macAddresses.push({
+          interface: interfaceName,
+          mac: iface.mac
+        });
+      }
+    });
+  }
+
+  const userInfo = os.userInfo();  // Fetch user info
+  const hostname = os.hostname();  // Get computer name
   const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
   const userAgent = req.headers['user-agent'];
   let geo;
@@ -48,6 +66,9 @@ app.get('/', async (req, res) => {
     <p><strong>IP:</strong> ${ip}</p>
     <p><strong>Location:</strong> ${geo ? JSON.stringify(geo) : 'Location Not Found.'}</p>
     <p><strong>User Agent:</strong> ${userAgent}</p>
+    <p><strong>MAC Address:</strong> ${macAddresses}</p>
+    <p><strong>User Info:</strong> ${userInfo}</p>
+    <p><strong>Host Name:</strong> ${hostname}</p>
   `;
 
   try {
