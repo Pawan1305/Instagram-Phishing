@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Phishing Simulation – Training Notice</title>
+  <meta name="color-scheme" content="light dark" />
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: rgba(17,24,39,0.92);
+      --panel-light: rgba(248,250,252,0.92);
+      --text: #e5e7eb;
+      --text-dark: #0f172a;
+      --accent: #22c55e;
+      --accent-2: #60a5fa;
+      --shadow: 0 10px 30px rgba(0,0,0,.25);
+      --radius: 0;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f1f5f9;
+        --panel: var(--panel-light);
+        --text: var(--text-dark);
+      }
+    }
+
+    html, body {
+      margin: 0;
+      height: 100%;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background: radial-gradient(1200px 600px at 10% -10%, rgba(96,165,250,.25), transparent), var(--bg);
+      background-size: cover;
+      color: var(--text);
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      width: 100%;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 18px;
+      background: linear-gradient(135deg, rgba(34,197,94,.15), rgba(96,165,250,.15));
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .badge {
+      font-weight: 700;
+      letter-spacing: .02em;
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(34,197,94,.18);
+      color: #bbf7d0;
+      border: 1px solid rgba(34,197,94,.35);
+    }
+
+    .content {
+      flex: 1;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(26px, 3.2vw, 40px);
+      line-height: 1.2;
+      letter-spacing: -.01em;
+    }
+
+    .sub {
+      margin: 0 0 22px;
+      font-size: 16px;
+      opacity: .9;
+    }
+
+    .notice {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 16px;
+      background: rgba(96,165,250,.12);
+      border: 1px solid rgba(96,165,250,.35);
+      padding: 14px 16px;
+      border-radius: 14px;
+      margin: 18px 0 26px;
+    }
+
+    .notice svg { width: 36px; height: 36px; }
+
+    .btn {
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.06);
+      color: inherit;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      width: fit-content;
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, rgba(34,197,94,.9), rgba(34,197,94,.7));
+      color: #052e16;
+      border-color: rgba(34,197,94,.9);
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="topbar">
+      <span class="badge">TRAINING</span>
+      <span>Phishing Simulation – Educational Exercise</span>
+    </div>
+
+    <div class="content">
+      <h1>This was a phishing simulation test.</h1>
+      <p class="sub">You clicked a link from a simulated phishing message. Don’t worry—this was only a training exercise designed to help you recognize and report phishing attempts.</p>
+
+      <section class="notice">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M12 9v3m0 4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"/>
+        </svg>
+        <p><strong>You were phished in this simulation</strong>, but your data is completely safe. No passwords or personal information were collected. This exercise is for education only—stay alert next time!</p>
+      </section>
+
+      <!-- <a class="btn primary" href="#">Start 3‑minute refresher ▶</a> -->
+    </div>
+  </main>
+</body>
+</html>
